@@ -25,14 +25,13 @@ app.use("/api", productRoutes);
 
 // Connect to MongoDB and start server
 mongoose
-  .connect(process.env.MONGODB_URI, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-  })
+  .connect(
+    "mongodb+srv://hasarasankalpa176:WiPQMFBmzt5lKYMk@users.va8qfqn.mongodb.net/"
+  )
   .then(() => {
     console.log("Connected to MongoDB");
     app.listen(PORT, () => {
-      console.log(`Server is running on port ${PORT}`);
+      console.log(`Server running on port ${PORT}`);
     });
   })
   .catch((err) => console.error("Database connection error:", err));
