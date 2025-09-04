@@ -9,7 +9,6 @@ const userRoutes = require("./Routes/UserRoutes");
 const productRoutes = require("./Routes/ProductRoutes");
 
 const app = express();
-const PORT = process.env.PORT || 8000;
 dotenv.config();
 
 // Middlewares
@@ -22,6 +21,9 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/api", userRoutes);
 app.use("/api", productRoutes);
+app.get("/", (req, res) => {
+  res.send("Backend is working 🚀");
+});
 
 // Connect to MongoDB and start server
 mongoose
@@ -30,6 +32,8 @@ mongoose
   )
   .then(() => {
     console.log("Connected to MongoDB");
+    const PORT = process.env.PORT || 8000;
+
     app.listen(PORT, () => {
       console.log(`Server running on port ${PORT}`);
     });
