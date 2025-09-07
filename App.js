@@ -7,7 +7,7 @@ const dotenv = require("dotenv");
 
 const userRoutes = require("./Routes/UserRoutes");
 const productRoutes = require("./Routes/ProductRoutes");
-
+const messageRoutes = require("./Routes/messageRoutes");
 const app = express();
 dotenv.config();
 
@@ -21,6 +21,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/api", userRoutes);
 app.use("/api", productRoutes);
+app.use("/api/messages", messageRoutes);
+
 app.get("/", (req, res) => {
   res.send("Backend is working 🚀");
 });
