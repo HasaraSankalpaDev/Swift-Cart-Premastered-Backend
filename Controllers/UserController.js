@@ -129,10 +129,27 @@ const updateUser = async (req, res, next) => {
   return res.status(200).json(user);
 };
 
+// Get User by ID
+const getUserById = async (req, res) => {
+  const { uId } = req.params;
+
+  try {
+    const user = await User.findById(uId).select("-uPass"); // exclude password
+    if (!user) {
+      return res.status(404).json({ error: "User not found" });
+    }
+    return res.status(200).json(user);
+  } catch (err) {
+    console.error("Error fetching user by ID:", err);
+    return res.status(500).json({ error: "Internal server error" });
+  }
+};
+
 module.exports = {
   registerUser,
   getAllUsers,
   loginUser,
   deleteUser,
   updateUser,
+  getUserById,
 };
